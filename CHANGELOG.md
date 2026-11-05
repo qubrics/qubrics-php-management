@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Breaking: replace `sendmux/management` with `qubrics/management` and PHP imports from `Sendmux\` with `Qubrics\`.
+- Require `qubrics/core:^3.0` and use `app.qubrics.com` by default.
+- Retain existing root API keys, OAuth tokens and explicit base URLs.
+
 ## 2.1.1 (2026-09-16)
 
 ### Security
