@@ -59,7 +59,7 @@ class MailboxAppPasswordResult implements ModelInterface, ArrayAccess, JsonSeria
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'credential' => '\Qubrics\Management\Model\MailboxAppPasswordResultCredential'
+        'credential' => '\Qubrics\Management\Model\MailboxCredential'
     ];
 
     /**
@@ -270,9 +270,9 @@ class MailboxAppPasswordResult implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Gets credential
      *
-     * @return \Qubrics\Management\Model\MailboxAppPasswordResultCredential
+     * @return \Qubrics\Management\Model\MailboxCredential
      */
-    public function getCredential(): \Qubrics\Management\Model\MailboxAppPasswordResultCredential
+    public function getCredential(): \Qubrics\Management\Model\MailboxCredential
     {
         return $this->container['credential'];
     }
@@ -280,11 +280,11 @@ class MailboxAppPasswordResult implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Sets credential
      *
-     * @param \Qubrics\Management\Model\MailboxAppPasswordResultCredential $credential credential
+     * @param \Qubrics\Management\Model\MailboxCredential $credential credential
      *
      * @return $this
      */
-    public function setCredential(\Qubrics\Management\Model\MailboxAppPasswordResultCredential $credential): static
+    public function setCredential(\Qubrics\Management\Model\MailboxCredential $credential): static
     {
         if (is_null($credential)) {
             throw new InvalidArgumentException('non-nullable credential cannot be null');

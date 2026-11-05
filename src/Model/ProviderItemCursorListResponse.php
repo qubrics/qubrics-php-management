@@ -61,7 +61,7 @@ class ProviderItemCursorListResponse implements ModelInterface, ArrayAccess, Jso
     protected static array $openAPITypes = [
         'meta' => '\Qubrics\Management\Model\ResponseMeta',
         'ok' => 'bool',
-        'data' => '\Qubrics\Management\Model\ProviderItem[]',
+        'data' => '\Qubrics\Management\Model\ProviderListItem[]',
         'pagination' => '\Qubrics\Management\Model\CursorPagination'
     ];
 
@@ -354,7 +354,7 @@ class ProviderItemCursorListResponse implements ModelInterface, ArrayAccess, Jso
     /**
      * Gets data
      *
-     * @return \Qubrics\Management\Model\ProviderItem[]
+     * @return \Qubrics\Management\Model\ProviderListItem[]
      */
     public function getData(): array
     {
@@ -364,7 +364,7 @@ class ProviderItemCursorListResponse implements ModelInterface, ArrayAccess, Jso
     /**
      * Sets data
      *
-     * @param \Qubrics\Management\Model\ProviderItem[] $data data
+     * @param \Qubrics\Management\Model\ProviderListItem[] $data data
      *
      * @return $this
      */

@@ -300,7 +300,7 @@ class MailboxCreateResult implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Sets credential
      *
-     * @param \Qubrics\Management\Model\MailboxCredential|null $credential credential
+     * @param \Qubrics\Management\Model\MailboxCredential|null $credential Initial credential for the mailbox. `null` if credential generation failed — call POST /mailboxes/{id}/keys to retry.
      *
      * @return $this
      */

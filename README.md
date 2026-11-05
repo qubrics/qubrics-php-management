@@ -24,13 +24,6 @@ Until then, retain your existing Composer constraint.
 composer require qubrics/management:^3.0
 ```
 
-## Upgrade from 2.x
-
-Replace `sendmux/management` with `qubrics/management:^3.0` in `composer.json`, then run `composer update`.
-Change PHP imports from `Sendmux\` to `Qubrics\`.
-Replace `Sendmux\Core\SendmuxApiError` with `Qubrics\Core\QubricsApiError`.
-Existing `smx_root_` keys keep working. The default API host is `app.qubrics.com`; explicit base URLs remain supported.
-
 Upgrading from 1.x? Read the [PHP 2.0 migration guide](https://github.com/qubrics/qubrics-sdk/blob/main/packages/php/UPGRADING.md) before changing your Composer constraint.
 
 If your custom Guzzle client uses `FileCookieJar` or `SessionCookieJar`, back up its state and re-authenticate into a fresh jar when upgrading. Guzzle rejects old records without a boolean `HostOnly`; do not guess that value. Default Qubrics API clients do not enable cookies. See the [upstream migration warning](https://github.com/guzzle/guzzle/security/advisories/GHSA-wm3w-8rrp-j577).
@@ -47,19 +40,19 @@ require __DIR__ . '/vendor/autoload.php';
 use Qubrics\Management\ClientFactory;
 
 $connection = ClientFactory::createConnectionApi(
-    getenv('QUBRICS_ROOT_API_KEY') ?: getenv('SENDMUX_ROOT_API_KEY') ?: ''
+    getenv('QUBRICS_ROOT_API_KEY') ?: ''
 );
 
 $mailboxes = ClientFactory::createMailboxesApi(
-    getenv('QUBRICS_ROOT_API_KEY') ?: getenv('SENDMUX_ROOT_API_KEY') ?: ''
+    getenv('QUBRICS_ROOT_API_KEY') ?: ''
 );
 
 $domains = ClientFactory::createDomainsApi(
-    getenv('QUBRICS_ROOT_API_KEY') ?: getenv('SENDMUX_ROOT_API_KEY') ?: ''
+    getenv('QUBRICS_ROOT_API_KEY') ?: ''
 );
 
 $webhooks = ClientFactory::createWebhooksApi(
-    getenv('QUBRICS_ROOT_API_KEY') ?: getenv('SENDMUX_ROOT_API_KEY') ?: ''
+    getenv('QUBRICS_ROOT_API_KEY') ?: ''
 );
 ```
 
@@ -73,11 +66,16 @@ The factory also exposes clients for billing, domain filters, emails, inboxes, m
 
 ```php
 $client = ClientFactory::createConnectionApiWithAccessToken(
-    static fn (): string => getenv('QUBRICS_ACCESS_TOKEN') ?: getenv('SENDMUX_ACCESS_TOKEN') ?: ''
+    static fn (): string => getenv('QUBRICS_ACCESS_TOKEN') ?: ''
 );
 ```
 
 See [OAuth setup and lifecycle](https://qubrics.com/docs/developer-tools/oauth).
+
+For API-key authentication, omit `apiKey` to read `QUBRICS_API_KEY`.
+Omit `baseUrl` to read `QUBRICS_BASE_URL`.
+Nonempty Qubrics values take precedence over `SENDMUX_API_KEY` and
+`SENDMUX_BASE_URL`. Explicit arguments take precedence over environment values.
 
 ## Features
 
@@ -103,7 +101,7 @@ For help, include the package name, version, API surface, and sanitised request 
 - PHP SDK guide: [qubrics.com/docs/sdks/php](https://qubrics.com/docs/sdks/php)
 - Management API reference: [qubrics.com/docs/api/introduction](https://qubrics.com/docs/api/introduction)
 - API keys guide: [qubrics.com/docs/guides/api-keys](https://qubrics.com/docs/guides/api-keys)
-- Source repository: [github.com/qubrics/qubrics-php-management](https://github.com/qubrics/qubrics-php-management)
+- Source repository: [github.com/qubrics/qubrics-sdk](https://github.com/qubrics/qubrics-sdk)
 
 ## License
 

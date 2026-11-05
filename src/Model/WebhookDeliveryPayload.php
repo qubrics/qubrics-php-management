@@ -252,6 +252,7 @@ class WebhookDeliveryPayload implements ModelInterface, ArrayAccess, JsonSeriali
     public const EVENT_TYPE_MESSAGE_DELIVERY_DELAYED = 'message.delivery_delayed';
     public const EVENT_TYPE_MESSAGE_RECEIVED = 'message.received';
     public const EVENT_TYPE_MESSAGE_RECEIVED_SPAM = 'message.received.spam';
+    public const EVENT_TYPE_CALENDAR_CHANGED = 'calendar.changed';
     public const EVENT_TYPE_SENDMUX_TEST = 'sendmux.test';
     public const EVENT_TYPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
@@ -270,6 +271,7 @@ class WebhookDeliveryPayload implements ModelInterface, ArrayAccess, JsonSeriali
             self::EVENT_TYPE_MESSAGE_DELIVERY_DELAYED,
             self::EVENT_TYPE_MESSAGE_RECEIVED,
             self::EVENT_TYPE_MESSAGE_RECEIVED_SPAM,
+            self::EVENT_TYPE_CALENDAR_CHANGED,
             self::EVENT_TYPE_SENDMUX_TEST,
             self::EVENT_TYPE_UNKNOWN_DEFAULT_OPEN_API,
         ];
@@ -543,9 +545,9 @@ class WebhookDeliveryPayload implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets payload
      *
-     * @return \Qubrics\Management\Model\WebhookEventPayload
+     * @return \Qubrics\Management\Model\WebhookEventPayload|\Qubrics\Management\Model\CalendarWebhookEventPayload|\Qubrics\Management\Model\MailWebhookEventPayload
      */
-    public function getPayload(): \Qubrics\Management\Model\WebhookEventPayload
+    public function getPayload(): \Qubrics\Management\Model\WebhookEventPayload|\Qubrics\Management\Model\CalendarWebhookEventPayload|\Qubrics\Management\Model\MailWebhookEventPayload
     {
         return $this->container['payload'];
     }
@@ -553,11 +555,11 @@ class WebhookDeliveryPayload implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Sets payload
      *
-     * @param \Qubrics\Management\Model\WebhookEventPayload $payload payload
+     * @param \Qubrics\Management\Model\WebhookEventPayload|\Qubrics\Management\Model\CalendarWebhookEventPayload|\Qubrics\Management\Model\MailWebhookEventPayload $payload payload
      *
      * @return $this
      */
-    public function setPayload(\Qubrics\Management\Model\WebhookEventPayload $payload): static
+    public function setPayload(\Qubrics\Management\Model\WebhookEventPayload|\Qubrics\Management\Model\CalendarWebhookEventPayload|\Qubrics\Management\Model\MailWebhookEventPayload $payload): static
     {
         if (is_null($payload)) {
             throw new InvalidArgumentException('non-nullable payload cannot be null');

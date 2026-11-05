@@ -411,7 +411,7 @@ class MailboxDomainDnsRecords implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets mx
      *
-     * @param \Qubrics\Management\Model\MailboxDomainMxRecord[] $mx MX records the customer must place. All point at Qubrics's inbound mail servers.
+     * @param \Qubrics\Management\Model\MailboxDomainMxRecord[] $mx MX records the customer must place. All point at Qubrics' inbound mail servers.
      *
      * @return $this
      */
