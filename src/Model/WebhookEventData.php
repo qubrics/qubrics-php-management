@@ -234,7 +234,7 @@ class WebhookEventData implements ModelInterface, ArrayAccess, JsonSerializable
         'recipients' => 'setRecipients',
         'reject_reason' => 'setRejectReason',
         'sender' => 'setSender',
-        'sendmux_message_id' => 'setQubricsMessageId',
+        'sendmux_message_id' => 'setSendmuxMessageId',
         'webhook_id' => 'setWebhookId'
     ];
 
@@ -257,7 +257,7 @@ class WebhookEventData implements ModelInterface, ArrayAccess, JsonSerializable
         'recipients' => 'getRecipients',
         'reject_reason' => 'getRejectReason',
         'sender' => 'getSender',
-        'sendmux_message_id' => 'getQubricsMessageId',
+        'sendmux_message_id' => 'getSendmuxMessageId',
         'webhook_id' => 'getWebhookId'
     ];
 
@@ -909,7 +909,7 @@ class WebhookEventData implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @return string|null
      */
-    public function getQubricsMessageId(): ?string
+    public function getSendmuxMessageId(): ?string
     {
         return $this->container['sendmux_message_id'];
     }
@@ -921,7 +921,7 @@ class WebhookEventData implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @return $this
      */
-    public function setQubricsMessageId(?string $sendmux_message_id): static
+    public function setSendmuxMessageId(?string $sendmux_message_id): static
     {
         if (is_null($sendmux_message_id)) {
             array_push($this->openAPINullablesSetToNull, 'sendmux_message_id');

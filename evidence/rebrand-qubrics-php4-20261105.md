@@ -23,6 +23,7 @@ Added `tests/public-contract.php`, using real Composer autoload, factories, gene
 - CI installs the checked-out core candidate via a temporary Composer manifest with path version `3.0.0`, then runs the public contract. Original Composer metadata is validated before the temporary manifest is generated.
 - Local environment: PHP 8.4.10, Composer 2.8.9. CI uses PHP 8.2.
 - Initial strict validation rejected the untracked baseline install's old `composer.lock`. That scratch lock was moved into artifacts; shipped metadata has no lockfile. No assertion or dependency constraint was weakened.
+- Review found a blanket brand substitution renamed the accessors for unchanged `sendmux_message_id`. A public deserialise/get/set/serialise test failed with `Call to undefined method Qubrics\Management\Model\WebhookEventData::getSendmuxMessageId()`. Restoring the original getter/setter and serializer maps removed the cause; the same test passes. This preserves the A17 legacy contract without adding new wire fields.
 
 Logs: MAIN `.claude/artifacts/rebrand-qubrics-php4/management-{baseline-install,candidate-install,public-contract-red,public-contract-green,syntax}.log`; baseline lock retained there as `management-baseline-composer.lock`.
 

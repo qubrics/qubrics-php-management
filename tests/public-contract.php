@@ -9,6 +9,7 @@ use Qubrics\Management\ClientFactory;
 use Qubrics\Management\Configuration;
 use Qubrics\Management\Model\Connection;
 use Qubrics\Management\Model\ConnectionResponse;
+use Qubrics\Management\Model\WebhookEventData;
 use Qubrics\Management\ObjectSerializer;
 
 function expect(bool $condition, string $message): void
@@ -40,5 +41,10 @@ try {
 
 $response = ObjectSerializer::deserialize((object) ['data' => (object) []], ConnectionResponse::class);
 expect($response instanceof ConnectionResponse && $response->getData() instanceof Connection, 'Nested generated model names autoload');
+
+$event = ObjectSerializer::deserialize((object) ['sendmux_message_id' => 'message-123', 'recipients' => []], WebhookEventData::class);
+expect($event->getSendmuxMessageId() === 'message-123', 'Legacy message-ID accessor remains available');
+$event->setSendmuxMessageId('message-456');
+expect(ObjectSerializer::sanitizeForSerialization($event)->sendmux_message_id === 'message-456', 'Legacy message-ID setter preserves its wire key');
 
 echo "Qubrics Management public contract passed\n";
