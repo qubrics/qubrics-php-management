@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ProviderCreateBodyQuotasPerDayAnyOf
+ * MailboxSendPolicySnapshot
  *
  * PHP version 8.1
  *
@@ -35,14 +35,14 @@ use ReturnTypeWillChange;
 use Qubrics\Management\ObjectSerializer;
 
 /**
- * ProviderCreateBodyQuotasPerDayAnyOf Class Doc Comment
+ * MailboxSendPolicySnapshot Class Doc Comment
  *
  * @package  Qubrics\Management
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess, JsonSerializable
+class MailboxSendPolicySnapshot implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static string $openAPIModelName = 'ProviderCreateBody_quotas_per_day_anyOf';
+    protected static string $openAPIModelName = 'MailboxSendPolicySnapshot';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,8 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'max' => 'int',
-        'min' => 'int'
+        'policy' => '\Qubrics\Management\Model\MailboxSendPolicy',
+        'version' => 'string'
     ];
 
     /**
@@ -69,8 +69,8 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      * @var array<string, string|null>
      */
     protected static array $openAPIFormats = [
-        'max' => null,
-        'min' => null
+        'policy' => null,
+        'version' => null
     ];
 
     /**
@@ -79,8 +79,8 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      * @var array<string, bool>
      */
     protected static array $openAPINullables = [
-        'max' => false,
-        'min' => false
+        'policy' => false,
+        'version' => false
     ];
 
     /**
@@ -159,8 +159,8 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'max' => 'max',
-        'min' => 'min'
+        'policy' => 'policy',
+        'version' => 'version'
     ];
 
     /**
@@ -169,8 +169,8 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      * @var array<string, string>
      */
     protected static array $setters = [
-        'max' => 'setMax',
-        'min' => 'setMin'
+        'policy' => 'setPolicy',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -179,8 +179,8 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      * @var array<string, string>
      */
     protected static array $getters = [
-        'max' => 'getMax',
-        'min' => 'getMin'
+        'policy' => 'getPolicy',
+        'version' => 'getVersion'
     ];
 
     /**
@@ -230,8 +230,8 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('max', $data ?? [], null);
-        $this->setIfExists('min', $data ?? [], null);
+        $this->setIfExists('policy', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
     }
 
     /**
@@ -259,18 +259,14 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['max'] === null) {
-            $invalidProperties[] = "'max' can't be null";
+        if ($this->container['policy'] === null) {
+            $invalidProperties[] = "'policy' can't be null";
         }
-        if (!is_null($this->container['max']) && ($this->container['max'] <= 0)) {
-            $invalidProperties[] = "invalid value for 'max', must be bigger than 0.";
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
         }
-
-        if ($this->container['min'] === null) {
-            $invalidProperties[] = "'min' can't be null";
-        }
-        if (!is_null($this->container['min']) && ($this->container['min'] <= 0)) {
-            $invalidProperties[] = "invalid value for 'min', must be bigger than 0.";
+        if (!is_null($this->container['version']) && !preg_match("/^[a-f0-9]{64}$/", $this->container['version'])) {
+            $invalidProperties[] = "invalid value for 'version', must be conform to the pattern /^[a-f0-9]{64}$/.";
         }
 
         return $invalidProperties;
@@ -286,65 +282,60 @@ class ProviderCreateBodyQuotasPerDayAnyOf implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets max
+     * Gets policy
      *
-     * @return int
+     * @return \Qubrics\Management\Model\MailboxSendPolicy
      */
-    public function getMax(): int
+    public function getPolicy(): \Qubrics\Management\Model\MailboxSendPolicy
     {
-        return $this->container['max'];
+        return $this->container['policy'];
     }
 
     /**
-     * Sets max
+     * Sets policy
      *
-     * @param int $max max
+     * @param \Qubrics\Management\Model\MailboxSendPolicy $policy policy
      *
      * @return $this
      */
-    public function setMax(int $max): static
+    public function setPolicy(\Qubrics\Management\Model\MailboxSendPolicy $policy): static
     {
-        if (is_null($max)) {
-            throw new InvalidArgumentException('non-nullable max cannot be null');
+        if (is_null($policy)) {
+            throw new InvalidArgumentException('non-nullable policy cannot be null');
         }
-
-        if (($max <= 0)) {
-            throw new InvalidArgumentException('invalid value for $max when calling ProviderCreateBodyQuotasPerDayAnyOf., must be bigger than 0.');
-        }
-
-        $this->container['max'] = $max;
+        $this->container['policy'] = $policy;
 
         return $this;
     }
 
     /**
-     * Gets min
+     * Gets version
      *
-     * @return int
+     * @return string
      */
-    public function getMin(): int
+    public function getVersion(): string
     {
-        return $this->container['min'];
+        return $this->container['version'];
     }
 
     /**
-     * Sets min
+     * Sets version
      *
-     * @param int $min min
+     * @param string $version Current policy version; also returned in ETag.
      *
      * @return $this
      */
-    public function setMin(int $min): static
+    public function setVersion(string $version): static
     {
-        if (is_null($min)) {
-            throw new InvalidArgumentException('non-nullable min cannot be null');
+        if (is_null($version)) {
+            throw new InvalidArgumentException('non-nullable version cannot be null');
         }
 
-        if (($min <= 0)) {
-            throw new InvalidArgumentException('invalid value for $min when calling ProviderCreateBodyQuotasPerDayAnyOf., must be bigger than 0.');
+        if ((!preg_match("/^[a-f0-9]{64}$/", ObjectSerializer::toString($version)))) {
+            throw new InvalidArgumentException("invalid value for \$version when calling MailboxSendPolicySnapshot., must conform to the pattern /^[a-f0-9]{64}$/.");
         }
 
-        $this->container['min'] = $min;
+        $this->container['version'] = $version;
 
         return $this;
     }

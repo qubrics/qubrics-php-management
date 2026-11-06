@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MailboxAppPasswordResultCredential
+ * MailboxCostUsageStorage
  *
  * PHP version 8.1
  *
@@ -35,14 +35,14 @@ use ReturnTypeWillChange;
 use Qubrics\Management\ObjectSerializer;
 
 /**
- * MailboxAppPasswordResultCredential Class Doc Comment
+ * MailboxCostUsageStorage Class Doc Comment
  *
  * @package  Qubrics\Management
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess, JsonSerializable
+class MailboxCostUsageStorage implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      *
      * @var string
      */
-    protected static string $openAPIModelName = 'MailboxAppPasswordResult_credential';
+    protected static string $openAPIModelName = 'MailboxCostUsage_storage';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,14 +59,10 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'imap_port' => 'int',
-        'key_prefix' => 'string',
-        'key_suffix' => 'string',
-        'public_id' => 'string',
-        'secret' => 'string',
-        'server' => 'string',
-        'smtp_port' => 'int',
-        'username' => 'string'
+        'allocated_amount' => 'string',
+        'posted_amount' => 'string',
+        'raw_amount' => 'string',
+        'state' => 'string'
     ];
 
     /**
@@ -75,14 +71,10 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      * @var array<string, string|null>
      */
     protected static array $openAPIFormats = [
-        'imap_port' => null,
-        'key_prefix' => null,
-        'key_suffix' => null,
-        'public_id' => null,
-        'secret' => null,
-        'server' => null,
-        'smtp_port' => null,
-        'username' => null
+        'allocated_amount' => null,
+        'posted_amount' => null,
+        'raw_amount' => null,
+        'state' => null
     ];
 
     /**
@@ -91,14 +83,10 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      * @var array<string, bool>
      */
     protected static array $openAPINullables = [
-        'imap_port' => false,
-        'key_prefix' => false,
-        'key_suffix' => false,
-        'public_id' => false,
-        'secret' => false,
-        'server' => false,
-        'smtp_port' => false,
-        'username' => false
+        'allocated_amount' => false,
+        'posted_amount' => false,
+        'raw_amount' => false,
+        'state' => false
     ];
 
     /**
@@ -177,14 +165,10 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'imap_port' => 'imap_port',
-        'key_prefix' => 'key_prefix',
-        'key_suffix' => 'key_suffix',
-        'public_id' => 'public_id',
-        'secret' => 'secret',
-        'server' => 'server',
-        'smtp_port' => 'smtp_port',
-        'username' => 'username'
+        'allocated_amount' => 'allocated_amount',
+        'posted_amount' => 'posted_amount',
+        'raw_amount' => 'raw_amount',
+        'state' => 'state'
     ];
 
     /**
@@ -193,14 +177,10 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      * @var array<string, string>
      */
     protected static array $setters = [
-        'imap_port' => 'setImapPort',
-        'key_prefix' => 'setKeyPrefix',
-        'key_suffix' => 'setKeySuffix',
-        'public_id' => 'setPublicId',
-        'secret' => 'setSecret',
-        'server' => 'setServer',
-        'smtp_port' => 'setSmtpPort',
-        'username' => 'setUsername'
+        'allocated_amount' => 'setAllocatedAmount',
+        'posted_amount' => 'setPostedAmount',
+        'raw_amount' => 'setRawAmount',
+        'state' => 'setState'
     ];
 
     /**
@@ -209,14 +189,10 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      * @var array<string, string>
      */
     protected static array $getters = [
-        'imap_port' => 'getImapPort',
-        'key_prefix' => 'getKeyPrefix',
-        'key_suffix' => 'getKeySuffix',
-        'public_id' => 'getPublicId',
-        'secret' => 'getSecret',
-        'server' => 'getServer',
-        'smtp_port' => 'getSmtpPort',
-        'username' => 'getUsername'
+        'allocated_amount' => 'getAllocatedAmount',
+        'posted_amount' => 'getPostedAmount',
+        'raw_amount' => 'getRawAmount',
+        'state' => 'getState'
     ];
 
     /**
@@ -251,6 +227,23 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
         return self::$openAPIModelName;
     }
 
+    public const STATE_PENDING = 'pending';
+    public const STATE__FINAL = 'final';
+    public const STATE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public static function getStateAllowableValues()
+    {
+        return [
+            self::STATE_PENDING,
+            self::STATE__FINAL,
+            self::STATE_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -266,14 +259,10 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('imap_port', $data ?? [], null);
-        $this->setIfExists('key_prefix', $data ?? [], null);
-        $this->setIfExists('key_suffix', $data ?? [], null);
-        $this->setIfExists('public_id', $data ?? [], null);
-        $this->setIfExists('secret', $data ?? [], null);
-        $this->setIfExists('server', $data ?? [], null);
-        $this->setIfExists('smtp_port', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
+        $this->setIfExists('allocated_amount', $data ?? [], null);
+        $this->setIfExists('posted_amount', $data ?? [], null);
+        $this->setIfExists('raw_amount', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
     }
 
     /**
@@ -301,30 +290,39 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
     {
         $invalidProperties = [];
 
-        if ($this->container['imap_port'] === null) {
-            $invalidProperties[] = "'imap_port' can't be null";
+        if ($this->container['allocated_amount'] === null) {
+            $invalidProperties[] = "'allocated_amount' can't be null";
         }
-        if ($this->container['key_prefix'] === null) {
-            $invalidProperties[] = "'key_prefix' can't be null";
+        if (!is_null($this->container['allocated_amount']) && !preg_match("/^\\d+\\.\\d{6}$/", $this->container['allocated_amount'])) {
+            $invalidProperties[] = "invalid value for 'allocated_amount', must be conform to the pattern /^\\d+\\.\\d{6}$/.";
         }
-        if ($this->container['key_suffix'] === null) {
-            $invalidProperties[] = "'key_suffix' can't be null";
+
+        if ($this->container['posted_amount'] === null) {
+            $invalidProperties[] = "'posted_amount' can't be null";
         }
-        if ($this->container['public_id'] === null) {
-            $invalidProperties[] = "'public_id' can't be null";
+        if (!is_null($this->container['posted_amount']) && !preg_match("/^\\d+\\.\\d{6}$/", $this->container['posted_amount'])) {
+            $invalidProperties[] = "invalid value for 'posted_amount', must be conform to the pattern /^\\d+\\.\\d{6}$/.";
         }
-        if ($this->container['secret'] === null) {
-            $invalidProperties[] = "'secret' can't be null";
+
+        if ($this->container['raw_amount'] === null) {
+            $invalidProperties[] = "'raw_amount' can't be null";
         }
-        if ($this->container['server'] === null) {
-            $invalidProperties[] = "'server' can't be null";
+        if (!is_null($this->container['raw_amount']) && !preg_match("/^\\d+\\.\\d{18}$/", $this->container['raw_amount'])) {
+            $invalidProperties[] = "invalid value for 'raw_amount', must be conform to the pattern /^\\d+\\.\\d{18}$/.";
         }
-        if ($this->container['smtp_port'] === null) {
-            $invalidProperties[] = "'smtp_port' can't be null";
+
+        if ($this->container['state'] === null) {
+            $invalidProperties[] = "'state' can't be null";
         }
-        if ($this->container['username'] === null) {
-            $invalidProperties[] = "'username' can't be null";
+        $allowedValues = self::getStateAllowableValues();
+        if (!is_null($this->container['state']) && !in_array($this->container['state'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'state', must be one of '%s'",
+                $this->container['state'],
+                implode("', '", $allowedValues)
+            );
         }
+
         return $invalidProperties;
     }
 
@@ -338,217 +336,128 @@ class MailboxAppPasswordResultCredential implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets imap_port
-     *
-     * @return int
-     */
-    public function getImapPort(): int
-    {
-        return $this->container['imap_port'];
-    }
-
-    /**
-     * Sets imap_port
-     *
-     * @param int $imap_port IMAP retrieval port
-     *
-     * @return $this
-     */
-    public function setImapPort(int $imap_port): static
-    {
-        if (is_null($imap_port)) {
-            throw new InvalidArgumentException('non-nullable imap_port cannot be null');
-        }
-        $this->container['imap_port'] = $imap_port;
-
-        return $this;
-    }
-
-    /**
-     * Gets key_prefix
+     * Gets allocated_amount
      *
      * @return string
      */
-    public function getKeyPrefix(): string
+    public function getAllocatedAmount(): string
     {
-        return $this->container['key_prefix'];
+        return $this->container['allocated_amount'];
     }
 
     /**
-     * Sets key_prefix
+     * Sets allocated_amount
      *
-     * @param string $key_prefix key_prefix
+     * @param string $allocated_amount allocated_amount
      *
      * @return $this
      */
-    public function setKeyPrefix(string $key_prefix): static
+    public function setAllocatedAmount(string $allocated_amount): static
     {
-        if (is_null($key_prefix)) {
-            throw new InvalidArgumentException('non-nullable key_prefix cannot be null');
+        if (is_null($allocated_amount)) {
+            throw new InvalidArgumentException('non-nullable allocated_amount cannot be null');
         }
-        $this->container['key_prefix'] = $key_prefix;
+
+        if ((!preg_match("/^\\d+\\.\\d{6}$/", ObjectSerializer::toString($allocated_amount)))) {
+            throw new InvalidArgumentException("invalid value for \$allocated_amount when calling MailboxCostUsageStorage., must conform to the pattern /^\\d+\\.\\d{6}$/.");
+        }
+
+        $this->container['allocated_amount'] = $allocated_amount;
 
         return $this;
     }
 
     /**
-     * Gets key_suffix
+     * Gets posted_amount
      *
      * @return string
      */
-    public function getKeySuffix(): string
+    public function getPostedAmount(): string
     {
-        return $this->container['key_suffix'];
+        return $this->container['posted_amount'];
     }
 
     /**
-     * Sets key_suffix
+     * Sets posted_amount
      *
-     * @param string $key_suffix key_suffix
+     * @param string $posted_amount posted_amount
      *
      * @return $this
      */
-    public function setKeySuffix(string $key_suffix): static
+    public function setPostedAmount(string $posted_amount): static
     {
-        if (is_null($key_suffix)) {
-            throw new InvalidArgumentException('non-nullable key_suffix cannot be null');
+        if (is_null($posted_amount)) {
+            throw new InvalidArgumentException('non-nullable posted_amount cannot be null');
         }
-        $this->container['key_suffix'] = $key_suffix;
+
+        if ((!preg_match("/^\\d+\\.\\d{6}$/", ObjectSerializer::toString($posted_amount)))) {
+            throw new InvalidArgumentException("invalid value for \$posted_amount when calling MailboxCostUsageStorage., must conform to the pattern /^\\d+\\.\\d{6}$/.");
+        }
+
+        $this->container['posted_amount'] = $posted_amount;
 
         return $this;
     }
 
     /**
-     * Gets public_id
+     * Gets raw_amount
      *
      * @return string
      */
-    public function getPublicId(): string
+    public function getRawAmount(): string
     {
-        return $this->container['public_id'];
+        return $this->container['raw_amount'];
     }
 
     /**
-     * Sets public_id
+     * Sets raw_amount
      *
-     * @param string $public_id Credential public ID
+     * @param string $raw_amount raw_amount
      *
      * @return $this
      */
-    public function setPublicId(string $public_id): static
+    public function setRawAmount(string $raw_amount): static
     {
-        if (is_null($public_id)) {
-            throw new InvalidArgumentException('non-nullable public_id cannot be null');
+        if (is_null($raw_amount)) {
+            throw new InvalidArgumentException('non-nullable raw_amount cannot be null');
         }
-        $this->container['public_id'] = $public_id;
+
+        if ((!preg_match("/^\\d+\\.\\d{18}$/", ObjectSerializer::toString($raw_amount)))) {
+            throw new InvalidArgumentException("invalid value for \$raw_amount when calling MailboxCostUsageStorage., must conform to the pattern /^\\d+\\.\\d{18}$/.");
+        }
+
+        $this->container['raw_amount'] = $raw_amount;
 
         return $this;
     }
 
     /**
-     * Gets secret
+     * Gets state
      *
      * @return string
      */
-    public function getSecret(): string
+    public function getState(): string
     {
-        return $this->container['secret'];
+        return $this->container['state'];
     }
 
     /**
-     * Sets secret
+     * Sets state
      *
-     * @param string $secret Mailbox credential — shown exactly once. Use as a Bearer token on the HTTP API and as the password for IMAP retrieval and SMTP submission.
+     * @param string $state state
      *
      * @return $this
      */
-    public function setSecret(string $secret): static
+    public function setState(string $state): static
     {
-        if (is_null($secret)) {
-            throw new InvalidArgumentException('non-nullable secret cannot be null');
+        if (is_null($state)) {
+            throw new InvalidArgumentException('non-nullable state cannot be null');
         }
-        $this->container['secret'] = $secret;
-
-        return $this;
-    }
-
-    /**
-     * Gets server
-     *
-     * @return string
-     */
-    public function getServer(): string
-    {
-        return $this->container['server'];
-    }
-
-    /**
-     * Sets server
-     *
-     * @param string $server Mailbox server name
-     *
-     * @return $this
-     */
-    public function setServer(string $server): static
-    {
-        if (is_null($server)) {
-            throw new InvalidArgumentException('non-nullable server cannot be null');
+        $allowedValues = self::getStateAllowableValues();
+        if (!in_array($state, $allowedValues, true)) {
+            $state = self::STATE_UNKNOWN_DEFAULT_OPEN_API;
         }
-        $this->container['server'] = $server;
-
-        return $this;
-    }
-
-    /**
-     * Gets smtp_port
-     *
-     * @return int
-     */
-    public function getSmtpPort(): int
-    {
-        return $this->container['smtp_port'];
-    }
-
-    /**
-     * Sets smtp_port
-     *
-     * @param int $smtp_port SMTP submission port
-     *
-     * @return $this
-     */
-    public function setSmtpPort(int $smtp_port): static
-    {
-        if (is_null($smtp_port)) {
-            throw new InvalidArgumentException('non-nullable smtp_port cannot be null');
-        }
-        $this->container['smtp_port'] = $smtp_port;
-
-        return $this;
-    }
-
-    /**
-     * Gets username
-     *
-     * @return string
-     */
-    public function getUsername(): string
-    {
-        return $this->container['username'];
-    }
-
-    /**
-     * Sets username
-     *
-     * @param string $username Mailbox email address used as the login
-     *
-     * @return $this
-     */
-    public function setUsername(string $username): static
-    {
-        if (is_null($username)) {
-            throw new InvalidArgumentException('non-nullable username cannot be null');
-        }
-        $this->container['username'] = $username;
+        $this->container['state'] = $state;
 
         return $this;
     }

@@ -1,10 +1,23 @@
 # Changelog
 
-## Unreleased
+## 3.0.0 (2026-11-06)
 
-- Breaking: replace `sendmux/management` with `qubrics/management` and PHP imports from `Sendmux\` with `Qubrics\`.
-- Require `qubrics/core:^3.0` and use `app.qubrics.com` by default.
-- Retain existing root API keys, OAuth tokens and explicit base URLs.
+### Qubrics rename
+
+- Publish as `qubrics/management` at 3.0.0 with `Qubrics\` namespaces and Qubrics service defaults.
+- Keep existing credential prefixes, OAuth/custom URL configuration and compatibility wire names.
+
+### Features
+
+- Add provider variable management fields and delivery-group fields to delivery logs.
+
+### Breaking changes
+
+- Return `ProviderListItem[]` from `ProviderItemCursorListResponse::getData()` for `managementListProviders()`. Read variables from the `ProviderItem` detail model returned by `managementGetProvider()`.
+- Use `MailWebhookEventPayload` for mail fixtures and `CalendarWebhookEventPayload` for calendar fixtures. The base `WebhookEventPayload::setData()` accepts `CalendarWebhookEventData`.
+- Remove the deprecated `MailboxAppPasswordResultCredential` alias in 3.0. Use `MailboxCredential` instead.
+- Remove the deprecated `ProviderCreateBodyQuotasPerDayAnyOf` alias in 3.0. Use `ProviderQuotaRange` instead.
+- Follow the [PHP 3.0 migration guide](https://github.com/qubrics/qubrics-sdk/blob/main/packages/php/UPGRADING-3.0.md) when updating typed wrappers and manually constructed models.
 
 ## 2.1.1 (2026-09-16)
 
