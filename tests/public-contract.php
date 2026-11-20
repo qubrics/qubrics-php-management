@@ -89,6 +89,27 @@ $expect(
     'Legacy message-ID setter preserves its wire key'
 );
 
+$mailEventMetadata = [
+    'MESSAGE_DELIVERED' => 'message.delivered', 'MESSAGE_BOUNCED' => 'message.bounced',
+    'MESSAGE_COMPLAINED' => 'message.complained', 'MESSAGE_REJECTED' => 'message.rejected',
+    'MESSAGE_DELIVERY_DELAYED' => 'message.delivery_delayed', 'MESSAGE_RECEIVED' => 'message.received',
+    'MESSAGE_RECEIVED_SPAM' => 'message.received.spam', 'SENDMUX_TEST' => 'sendmux.test',
+    'UNKNOWN_DEFAULT_OPEN_API' => 'unknown_default_open_api',
+];
+foreach ([
+    [WebhookDeliveryAttempt::class, 'EVENT_TYPE_', 'getEventTypeAllowableValues'],
+    [WebhookDeliveryPayload::class, 'EVENT_TYPE_', 'getEventTypeAllowableValues'],
+    [WebhookSubscription::class, 'EVENT_TYPES_', 'getEventTypesAllowableValues'],
+    [WebhookSubscriptionWithSecret::class, 'EVENT_TYPES_', 'getEventTypesAllowableValues'],
+] as [$model, $prefix, $getter]) {
+    $expect(is_callable([$model, $getter]), 'Historical webhook models retain mail metadata: ' . $model);
+    foreach ($mailEventMetadata as $name => $value) {
+        $expect(constant($model . '::' . $prefix . $name) === $value, 'Mail event constants remain available');
+        $expect(in_array($value, $model::$getter(), true), 'Mail event metadata retains existing values');
+    }
+    $expect(!in_array('calendar.changed', $model::$getter(), true), 'Retired calendar event is absent from metadata');
+}
+
 foreach (['CalendarWebhookEventData', 'CalendarWebhookEventPayload'] as $model) {
     $expect(!class_exists('Qubrics\\Management\\Model\\' . $model), 'Retired calendar model is absent: ' . $model);
 }
